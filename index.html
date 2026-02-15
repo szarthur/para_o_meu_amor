@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Para Clara</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(180deg,#cfe9ff,#eaf4ff);
+  color:#1f2d3d;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:24px;
+}
+
+/* ===== CARROSSEL ===== */
+.carousel-wrapper{
+  overflow:hidden;
+  width:100%;
+  margin:0 auto 40px;
+}
+
+.carousel{
+  display:flex;
+  gap:24px;
+  align-items:center;
+}
+
+.carousel-item{
+  flex:0 0 80%;
+  max-width:80%;
+  display:flex;
+  justify-content:center;
+}
+
+.carousel-item img,
+.carousel-item video{
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  border-radius:22px;
+  box-shadow:0 12px 28px rgba(0,0,0,0.15);
+  background:#000;
+}
+
+/* ===== TEXTO ===== */
+.paragraph{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:22px;
+  line-height:1.75;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.highlight{
+  text-align:center;
+  font-size:1.9em;
+  font-weight:bold;
+  margin:42px 0 26px;
+  color:#1a4fa3;
+}
+
+.music-box{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:32px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.signature{
+  text-align:right;
+  font-style:italic;
+  margin-top:32px;
+}
+
+footer{
+  text-align:center;
+  opacity:0.7;
+  margin-top:24px;
+  font-size:0.9em;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- CARROSSEL -->
+<div class="carousel-wrapper">
+  <div class="carousel" id="carousel">
+
+    <div class="carousel-item">
+      <img src="foto1.jpeg">
+    </div>
+
+    <div class="carousel-item">
+      <img src="foto2.jpeg">
+    </div>
+
+    <div class="carousel-item">
+      <video autoplay muted loop playsinline>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="carousel-item">
+      <img src="foto3.jpeg">
+    </div>
+
+    <!-- CLONE DA PRIMEIRA -->
+    <div class="carousel-item">
+      <img src="foto1.jpeg">
+    </div>
+
+  </div>
+</div>
+
+<!-- TEXTO -->
+<div class="paragraph">Esse é o amor da minha vida...</div>
+
+<div class="highlight">É você. Sempre foi você.</div>
+
+<div class="music-box">
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/7fkIYXPqKXQ7Swnqm0GYS6"
+width="100%" height="152" frameborder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+</div>
+
+<div class="signature">
+Com amor, a pessoa que mais te ama nesse mundo.
+</div>
+
+<footer>
+Feito com carinho, só pra você.
+</footer>
+
+</div>
+
+<script>
+const carousel = document.getElementById("carousel");
+const items = document.querySelectorAll(".carousel-item");
+const gap = 24;
+let index = 0;
+
+function center(){
+  const wrap = document.querySelector(".carousel-wrapper").offsetWidth;
+  const item = items[0].offsetWidth;
+  return (wrap - item) / 2;
+}
+
+function slide(){
+  const size = items[0].offsetWidth + gap;
+
+  carousel.style.transition = "transform 0.6s ease";
+  carousel.style.transform =
+    `translateX(-${index * size - center()}px)`;
+
+  index++;
+
+  if(index === items.length - 1){
+    setTimeout(() => {
+      carousel.style.transition = "none";
+      index = 0;
+      carousel.style.transform =
+        `translateX(${center()}px)`;
+    }, 800);
+  }
+
+  setTimeout(slide, 3500);
+}
+
+window.onload = () => {
+  carousel.style.transform = `translateX(${center()}px)`;
+  setTimeout(slide, 3500);
+};
+</script>
+
+</body>
+</html>
